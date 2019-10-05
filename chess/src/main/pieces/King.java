@@ -28,4 +28,9 @@ public class King implements Piece {
         }
 
     }
+
+    @Override
+    public Piece makeOfficer() {
+        return null;
+    }
 }

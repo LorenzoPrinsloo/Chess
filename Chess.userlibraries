@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<eclipse-userlibraries>
+  <library name="Python 2.7 (yoco-admin) interpreter library">
+    <archive path="/Users/cmlprinsloogmail.com/Documents/python/yoco-admin/venv/lib/python2.7" />
+    <archive path="/Users/cmlprinsloogmail.com/Documents/python/yoco-admin/venv/lib/python2.7/lib-dynload" />
+    <archive path="/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7" />
+    <archive path="/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/plat-darwin" />
+    <archive path="/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/lib-tk" />
+    <archive path="/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/plat-mac" />
+    <archive path="/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/plat-mac/lib-scriptpackages" />
+    <archive path="/Users/cmlprinsloogmail.com/Documents/python/yoco-admin/venv/lib/python2.7/site-packages" />
+    <archive path="/Users/cmlprinsloogmail.com/Library/Caches/IntelliJIdea2019.1/python_stubs/430049816" />
+    <archive path="/Users/cmlprinsloogmail.com/Library/Application Support/IntelliJIdea2019.1/python/helpers/python-skeletons" />
+    <archive path="/Users/cmlprinsloogmail.com/Library/Application Support/IntelliJIdea2019.1/python/helpers/typeshed/stdlib/2" />
+    <archive path="/Users/cmlprinsloogmail.com/Library/Application Support/IntelliJIdea2019.1/python/helpers/typeshed/stdlib/2and3" />
+    <archive path="/Users/cmlprinsloogmail.com/Library/Application Support/IntelliJIdea2019.1/python/helpers/typeshed/third_party/2" />
+    <archive path="/Users/cmlprinsloogmail.com/Library/Application Support/IntelliJIdea2019.1/python/helpers/typeshed/third_party/2and3" />
+  </library>
+  <library name="scala-sdk-2.12.6">
+    <archive path="/Users/cmlprinsloogmail.com/.ivy2/cache/org.scala-lang/scala-reflect/jars/scala-reflect-2.12.6.jar" />
+    <archive path="/Users/cmlprinsloogmail.com/.ivy2/cache/org.scala-lang/scala-library/jars/scala-library-2.12.6.jar" />
+    <archive path="/Users/cmlprinsloogmail.com/.ivy2/cache/org.scala-lang/scala-reflect/srcs/scala-reflect-2.12.6-sources.jar" />
+    <archive path="/Users/cmlprinsloogmail.com/.ivy2/cache/org.scala-lang/scala-library/srcs/scala-library-2.12.6-sources.jar" />
+  </library>
+</eclipse-userlibraries>
+
