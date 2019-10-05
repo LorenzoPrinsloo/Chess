@@ -1,5 +1,7 @@
 package root;
 
+import com.sun.tools.javac.util.Pair;
+
 import java.util.List;
 
 public class Utils {
@@ -27,6 +29,29 @@ public class Utils {
             return true;
         } else {
             return false;
+        }
+    }
+
+    /**
+     * Calculate the step needed to navigate through matrix in a specific direction
+     */
+    public static Pair<Integer, Integer> calcStep(Move move) {
+        Integer rowStep = toStep(move.getTo().getRow() - move.getFrom().getRow());
+        Integer colStep = toStep(move.getTo().getColumn() - move.getFrom().getColumn());
+
+        return new Pair<>(rowStep, colStep);
+    }
+
+    /**
+     * Convert difference in number to a step for a array/iterator
+     */
+    private static Integer toStep(Integer i){
+        if(i > 0){
+            return 1;
+        } else if(i < 0){
+            return -1;
+        } else {
+            return 0;
         }
     }
 }
