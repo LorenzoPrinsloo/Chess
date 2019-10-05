@@ -15,6 +15,6 @@ p p d p p p p d p p
 . . . . . . . . . .
 . . . . . . . . . .
 . . . . . . . . . .
-R N N B Q K B N N R
+E N N B Q K B N N R
 -----
 w:+++-:0:0

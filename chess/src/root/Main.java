@@ -48,8 +48,8 @@ public class Main {
 //                }
 //            }
 
-            Knight b = new Knight(PlayerType.BLACK);
-            Move move = new Move(new Position(1, 9), new Position( 1, 7));
+            Elephant b = new Elephant(PlayerType.BLACK);
+            Move move = new Move(new Position(0, 9), new Position( 0, 1));
 
             System.out.println("Valid: "+b.isValidMove(move, board));
         } catch (Exception e) {

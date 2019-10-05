@@ -20,16 +20,21 @@ public class Pawn implements Piece {
     @Override
     public boolean isValidMove(Move move, Board board) {
 
-        int diff = move.getTo().getRow() - move.getFrom().getRow();
+        int rowDiff = move.getTo().getRow() - move.getFrom().getRow();
+        int colDiff = move.getTo().getColumn() - move.getFrom().getColumn();
 
-        if(diff < 0 && owner == PlayerType.BLACK) {
-            if(diff == -1){
-                Piece oneAhead = board.getBoardMatrix().get(move.getTo().getRow()).get(move.getTo().getColumn());
-                if(oneAhead == null) {
+        if(rowDiff < 0 && owner == PlayerType.BLACK) {
+            if(rowDiff == -1){ // move upwards
+                Piece dest = board.getBoardMatrix().get(move.getTo().getRow()).get(move.getTo().getColumn());
+
+                if(Math.abs(colDiff) == 1 && dest.getOwner() != owner){
+                    System.out.println("Capture!");
+                    return true;
+                } else if(colDiff == 0 && dest == null) {
                     return true;
                 } else return false;
 
-            } else if(diff == -2 && isFirstMove) {
+            } else if(rowDiff == -2 && isFirstMove) {
 
                 Piece oneAhead = board.getBoardMatrix().get(move.getTo().getRow()-1).get(move.getTo().getColumn());
                 Piece twoAhead = board.getBoardMatrix().get(move.getTo().getRow()).get(move.getTo().getColumn());
@@ -38,14 +43,18 @@ public class Pawn implements Piece {
                     return true;
                 } else return false;
             } else return false;
-        } else if(diff > 0 && owner == PlayerType.WHITE) {
-            if(diff == 1){
-                Piece oneAhead = board.getBoardMatrix().get(move.getTo().getRow()).get(move.getTo().getColumn());
-                if(oneAhead == null) {
+        } else if(rowDiff > 0 && owner == PlayerType.WHITE) {
+            if(rowDiff == 1){
+                Piece dest = board.getBoardMatrix().get(move.getTo().getRow()).get(move.getTo().getColumn());
+
+                if(Math.abs(colDiff) == 1 && dest.getOwner() != owner){
+                    System.out.println("Capture!");
+                    return true;
+                } else if(colDiff == 0 && dest == null) {
                     return true;
                 } else return false;
 
-            } else if(diff == 2 && isFirstMove) {
+            } else if(rowDiff == 2 && isFirstMove) {
 
                 Piece oneAhead = board.getBoardMatrix().get(move.getTo().getRow()-1).get(move.getTo().getColumn());
                 Piece twoAhead = board.getBoardMatrix().get(move.getTo().getRow()).get(move.getTo().getColumn());

@@ -7,6 +7,7 @@ import root.Utils;
 
 import static root.Utils.isLongitudinalMove;
 
+// AKKA Castle
 public class Rook implements Piece {
 
     PlayerType owner;

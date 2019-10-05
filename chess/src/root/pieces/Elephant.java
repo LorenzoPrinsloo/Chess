@@ -4,17 +4,30 @@ import root.Board;
 import root.Move;
 import root.PlayerType;
 
-public class Elephant implements Piece {
+public class Elephant extends Rook {
 
     PlayerType owner;
 
     public Elephant(PlayerType o) {
+        super(o);
         this.owner = o;
     }
 
     @Override
     public boolean isValidMove(Move move, Board board) {
-        return false;
+        if(owner == PlayerType.BLACK) {
+            if(move.getTo().getRow() < 5){
+                return false;
+            } else {
+                return super.isValidMove(move, board);
+            }
+        } else { // PLayerType White
+            if(move.getTo().getRow() > 5){
+                return false;
+            } else {
+                return super.isValidMove(move, board);
+            }
+        }
     }
 
     @Override
