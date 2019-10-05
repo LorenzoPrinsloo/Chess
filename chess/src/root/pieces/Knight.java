@@ -41,7 +41,7 @@ public class Knight implements Piece {
         return new Pair<>(rowStep, colStep);
     }
 
-    public static boolean isLShapedMove(Move move) {
+    public boolean isLShapedMove(Move move) {
         Integer rowStep = Math.abs(calcStep(move).fst);
         Integer colStep = Math.abs(calcStep(move).snd);
 

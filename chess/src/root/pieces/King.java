@@ -5,6 +5,8 @@ import root.Move;
 import root.PlayerType;
 import root.Utils;
 
+import java.util.stream.Collectors;
+
 public class King implements Piece {
 
     PlayerType owner;
@@ -15,6 +17,13 @@ public class King implements Piece {
 
     @Override
     public boolean isValidMove(Move move, Board board) {
+        // To OF King
+        // From of Piece TODO find out how to calc this
+
+//
+//        board.getBoardMatrix().stream().flatMap(t -> t.stream())
+//                .filter(piece -> piece.getOwner() != owner)
+//                .map(p -> p.isValidMove(move ,board)).findFirst().isPresent();
 
         // has only moved one space in any direction
         int rowDiff = Math.abs(move.getFrom().getRow() - move.getFrom().getRow());
