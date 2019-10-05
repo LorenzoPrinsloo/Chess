@@ -1,7 +1,8 @@
-package main;
+package root;
 
 public enum PlayerType {
     WHITE,
-    BLACK
+    BLACK,
+    NOT_SET
 
 }

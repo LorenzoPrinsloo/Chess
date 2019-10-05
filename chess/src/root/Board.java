@@ -1,14 +1,16 @@
-package main;
+package root;
+
+import root.pieces.Piece;
 
 public class Board {
     PlayerType currentPlayer;
     CostlingStatus blackStatus;
     CostlingStatus whiteStatus;
-    char[][] boardMatrix;
+    Piece[][] boardMatrix;
     int halfMoveClock;
     int moveCounter; // Evertime Black moves this increments
 
-    public Board(PlayerType player, char[][] board) {
+    public Board(PlayerType player, Piece[][] board) {
         currentPlayer = player;
         blackStatus = new CostlingStatus();
         whiteStatus = new CostlingStatus();
@@ -17,7 +19,8 @@ public class Board {
         moveCounter = 0;
     }
 
-    public void move() {
+    public void move(Move move) {
+
         if(currentPlayer.equals(PlayerType.BLACK)){ // TODO move this logic so that it's not triggered by invalid moves
             moveCounter++;
         }
@@ -47,11 +50,11 @@ public class Board {
         this.whiteStatus = whiteStatus;
     }
 
-    public char[][] getBoardMatrix() {
+    public Piece[][] getBoardMatrix() {
         return boardMatrix;
     }
 
-    public void setBoardMatrix(char[][] boardMatrix) {
+    public void setBoardMatrix(Piece[][] boardMatrix) {
         this.boardMatrix = boardMatrix;
     }
 

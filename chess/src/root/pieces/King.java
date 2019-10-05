@@ -1,12 +1,16 @@
-package main.pieces;
+package root.pieces;
 
-import main.Board;
-import main.Move;
-import main.Utils;
+import root.Board;
+import root.Move;
+import root.PlayerType;
+import root.Utils;
 
 public class King implements Piece {
 
-    public King(){
+    PlayerType owner;
+
+    public King(PlayerType o) {
+        this.owner = o;
     }
 
     @Override
@@ -18,7 +22,7 @@ public class King implements Piece {
 
         if(Utils.isBetween(0,1, rowDiff) && Utils.isBetween(0,1, colDiff)) {
 
-            if(board.getBoardMatrix()[move.getTo().getRow()][move.getTo().getColumn()] == '.'){
+            if(board.getBoardMatrix()[move.getTo().getRow()][move.getTo().getColumn()] == null){
 
             }
             return true; //Default atm change this
@@ -30,7 +34,7 @@ public class King implements Piece {
     }
 
     @Override
-    public Piece makeOfficer() {
-        return null;
+    public PlayerType getOwner() {
+        return this.owner;
     }
 }

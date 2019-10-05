@@ -1,4 +1,4 @@
-package main;
+package root;
 
 public class CostlingStatus {
 
