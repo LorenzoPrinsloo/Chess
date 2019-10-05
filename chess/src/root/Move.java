@@ -4,10 +4,19 @@ public class Move {
 
     Position from;
     Position to;
+    PieceType promotionPiece;
+    boolean isPromotion;
 
     public Move(Position from, Position to) {
         this.from = from;
         this.to = to;
+    }
+
+    public Move(Position from, Position to, PieceType promotionPiece, boolean isPromotion) {
+        this.from = from;
+        this.to = to;
+        this.promotionPiece = promotionPiece;
+        this.isPromotion = isPromotion;
     }
 
     public Position getFrom() {

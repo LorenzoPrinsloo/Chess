@@ -16,7 +16,7 @@ public class DrunkenPawn extends Pawn {
     }
 
     @Override
-    public Piece makeOfficer() {
-        return super.makeOfficer();
+    public Piece makeOfficer(char requested, Board board) {
+        return super.makeOfficer(requested, board);
     }
 }

@@ -22,7 +22,7 @@ public class King implements Piece {
 
         if(Utils.isBetween(0,1, rowDiff) && Utils.isBetween(0,1, colDiff)) {
 
-            if(board.getBoardMatrix()[move.getTo().getRow()][move.getTo().getColumn()] == null){
+            if(board.getBoardMatrix().get(move.getTo().getRow()).get(move.getTo().getColumn()) == null){
 
             }
             return true; //Default atm change this

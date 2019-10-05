@@ -2,21 +2,26 @@ package root;
 
 import root.pieces.Piece;
 
+import java.util.List;
+import java.util.Map;
+
 public class Board {
     PlayerType currentPlayer;
     CostlingStatus blackStatus;
     CostlingStatus whiteStatus;
-    Piece[][] boardMatrix;
+    List<List<Piece>> boardMatrix;
     int halfMoveClock;
     int moveCounter; // Evertime Black moves this increments
+    Map<PieceType, Integer> pieceCount;
 
-    public Board(PlayerType player, Piece[][] board) {
+    public Board(PlayerType player, List<List<Piece>> board, Map<PieceType, Integer> pc, CostlingStatus blackStatus, CostlingStatus whiteStatus, int halfMoveClock, int moveCounter) {
         currentPlayer = player;
-        blackStatus = new CostlingStatus();
-        whiteStatus = new CostlingStatus();
+        this.blackStatus = blackStatus;
+        this.whiteStatus = whiteStatus;
         boardMatrix = board;
-        halfMoveClock = 0;
-        moveCounter = 0;
+        this.halfMoveClock = halfMoveClock;
+        this.moveCounter = moveCounter;
+        pieceCount = pc;
     }
 
     public void move(Move move) {
@@ -50,12 +55,28 @@ public class Board {
         this.whiteStatus = whiteStatus;
     }
 
-    public Piece[][] getBoardMatrix() {
+    public List<List<Piece>> getBoardMatrix() {
         return boardMatrix;
     }
 
-    public void setBoardMatrix(Piece[][] boardMatrix) {
+    public void setBoardMatrix(List<List<Piece>> boardMatrix) {
         this.boardMatrix = boardMatrix;
+    }
+
+    public void setEntryInBoardMatrix(int column, int row, Piece piece) {
+        int rowCount = 0;
+        for(List<Piece> pieces:  this.getBoardMatrix()){
+            if(rowCount == row) {
+                pieces.set(column, piece);
+
+                this.boardMatrix.set(row, pieces);
+            }
+            rowCount++;
+        }
+    }
+
+    public void setEntryInPieceCount(PieceType type, Integer i) {
+        this.pieceCount.replace(type, i);
     }
 
     public int getHalfMoveClock() {
@@ -72,5 +93,13 @@ public class Board {
 
     public void setMoveCounter(int moveCounter) {
         this.moveCounter = moveCounter;
+    }
+
+    public Map<PieceType, Integer> getPieceCount() {
+        return pieceCount;
+    }
+
+    public void setPieceCount(Map<PieceType, Integer> pieceCount) {
+        this.pieceCount = pieceCount;
     }
 }

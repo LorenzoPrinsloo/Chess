@@ -1,3 +1,11 @@
+n:4
+b:4
+q:1
+p:8
+d:2
+k:1
+r:2
+-----
 r n n b q k b n n r
 p p d p p p p d p p
 . . . . . . . . . .
@@ -8,3 +16,5 @@ p p d p p p p d p p
 . . . . . . . . . .
 P P D P P P P D P P
 R N N B Q K B N N R
+-----
+w:+++-:0:0
