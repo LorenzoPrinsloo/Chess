@@ -20,7 +20,7 @@ public class Move {
     }
 
     public Position getFrom() {
-        return from;
+        return this.from;
     }
 
     public void setFrom(Position from) {
@@ -28,7 +28,7 @@ public class Move {
     }
 
     public Position getTo() {
-        return to;
+        return this.to;
     }
 
     public void setTo(Position to) {
