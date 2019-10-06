@@ -12,6 +12,10 @@ public class Main {
     public static void main(String[] args) {
 
         try {
+//            Scanner boardScanner = new Scanner(new File("/Users/cmlprinsloogmail.com/Documents/Java/Chess/chess/src/root/input/board.txt"));
+//            Board board = ScannerInput.readBoard(boardScanner);
+//
+//            board.printBoard();
             Scanner boardScanner = new Scanner(new File(args[0]));
             Scanner moveScanner = new Scanner(new File(args[1]));
 

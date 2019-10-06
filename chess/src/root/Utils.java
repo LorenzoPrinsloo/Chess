@@ -109,14 +109,10 @@ public class Utils {
         int colDest = move.getTo().getColumn();
 
         while(rowCurrent <= 9 && colCurrent <= 9){
-            System.out.println("row: " +rowCurrent + " col: "+colCurrent);
-
             if((isSpace(boardMatrix.get(rowCurrent).get(colCurrent)) || boardMatrix.get(rowCurrent).get(colCurrent).getOwner() != owner) && rowCurrent == rowDest && colCurrent == colDest) {
-                System.out.println("Reached Location");
                 return true;
             } else if(!isSpace(boardMatrix.get(rowCurrent).get(colCurrent))) {
 
-                System.out.println("Got Blocked");
                 return false;
             }
 
@@ -124,7 +120,6 @@ public class Utils {
             colCurrent = colCurrent + step.snd;
         }
 
-        System.out.println("prematurely exit");
         return true;
     }
 

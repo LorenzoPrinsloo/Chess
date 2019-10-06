@@ -17,7 +17,7 @@ public class Bishop implements Piece {
     public boolean isValidMove(Move move, Board board) {
         if(isDiagonalMove(move)){
             return Utils.isValidDiagonalMove(move, board, owner);
-        } else { System.out.println("Not Diagonal Move"); return false;}
+        } else { return false;}
     }
 
     @Override

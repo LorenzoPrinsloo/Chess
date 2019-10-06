@@ -10,6 +10,9 @@ public class Move {
     boolean isNormal;
     boolean isCheckMate;
     boolean isCheck;
+    boolean isCastling;
+    boolean isQueenSide;
+    boolean isKingSide;
 
     public Move(Position from, Position to) { // Default Move
         this.from = from;
@@ -19,6 +22,7 @@ public class Move {
         this.isNormal = true;
         this.isCheck = false;
         this.isCheckMate = false;
+        this.isCastling = false;
     }
 
     public Move(Position from, Position to, boolean isCheck, boolean isCheckMate) { // Default Move
@@ -29,6 +33,7 @@ public class Move {
         this.isNormal = true;
         this.isCheck = isCheck;
         this.isCheckMate = isCheckMate;
+        this.isCastling = false;
     }
 
     public Move(Position from, Position to, PieceType promotionPiece, boolean isPromotion) { // Promotion Move
@@ -38,6 +43,7 @@ public class Move {
         this.isPromotion = isPromotion;
         this.isCapture = false;
         this.isNormal = false;
+        this.isCastling = false;
     }
 
     public Move(Position from, Position to, boolean isCapture, boolean isCheck, boolean isCheckMate) { // Capture Move
@@ -48,6 +54,18 @@ public class Move {
         this.isNormal = false;
         this.isCheck = isCheck;
         this.isCheckMate = isCheckMate;
+        this.isCastling = false;
+    }
+
+    public Move(boolean isCastling, boolean isQueenSide, boolean isKingSide){ // Castling Move
+        this.isCastling = isCastling;
+        this.isCapture = false;
+        this.isPromotion = false;
+        this.isNormal = false;
+        this.isCheck = false;
+        this.isCheckMate = false;
+        this.isQueenSide = isQueenSide;
+        this.isKingSide = isKingSide;
     }
 
     public Position getFrom() {

@@ -1,10 +1,7 @@
 package root;
 
 import root.errors.MoveValidationErrors;
-import root.pieces.King;
-import root.pieces.Pawn;
-import root.pieces.Piece;
-import root.pieces.Space;
+import root.pieces.*;
 
 import java.util.Collection;
 import java.util.List;
@@ -25,6 +22,7 @@ public class Board {
     private boolean isValidPromotion = true;
     private boolean isValidCheck = true;
     private boolean isValidCheckMate = true;
+    private boolean isValidCastling = true;
 
     public Board(Board copyFrom, List<List<Piece>> matrix) {
         currentPlayer = copyFrom.currentPlayer;
@@ -85,12 +83,46 @@ public class Board {
                     isValidCheckMate = false;
                     MoveValidationErrors.illegalCheckmate(line);
                 }
+            } else if(move.isCastling) {
+
+                if(move.isQueenSide) {
+                    if(currentPlayer == PlayerType.BLACK){
+                        if(!blackStatus.hasQueenCostling){
+                            isValidCastling = false;
+                            MoveValidationErrors.illegalCastlingMove(line);
+                        }
+                    } else { // White
+                        if(!whiteStatus.hasQueenCostling){
+                            isValidCastling = false;
+                            MoveValidationErrors.illegalCastlingMove(line);
+                        }
+                    }
+                } else { // King Side
+                    if(currentPlayer == PlayerType.BLACK){
+                        if(!blackStatus.hasKingCostling){
+                            isValidCastling = false;
+                            MoveValidationErrors.illegalCastlingMove(line);
+                        }
+                    } else { // White
+                        if(!whiteStatus.hasKingCostling){
+                            isValidCastling = false;
+                            MoveValidationErrors.illegalCastlingMove(line);
+                        }
+                    }
+                }
+
+
             }
 
 
-            if(isValidPromotion && isValidCheckMate && isValidCheck && isValidMove && isValidCapture) {
+            if(isValidPromotion && isValidCheckMate && isValidCheck && isValidMove && isValidCapture && isValidCastling) {
 
-                movePiece(move, piece); // Move/Capture
+                if(move.isCastling){ // CASTLING
+                    moveCastling(move);
+                } else {// DEFAULT
+
+                    movePiece(move, piece); // Move/Capture
+                }
                 if(piece.getType() == PieceType.PAWN || piece.getType() == PieceType.DRUNKED_PAWN){
                     this.halfMoveClock++;
                 }
@@ -308,6 +340,75 @@ public class Board {
         }
     }
 
+    public void moveCastling(Move move) throws Exception {
+
+        King king  =  getCurrentKing();
+        Rook rookToMove = new Rook(currentPlayer);
+        Position kingFrom = Utils.findPositionOnBoard(king, boardMatrix);
+
+        if(currentPlayer == PlayerType.BLACK){
+            move.setFrom(kingFrom);
+
+            if(move.isQueenSide){
+                blackStatus.hasQueenCostling = false;
+                move.setTo(new Position(2, 9));
+            } else { // King side
+                blackStatus.hasKingCostling = false;
+                move.setTo(new Position(8, 9));
+            }
+        } else { // WHITE
+            move.setFrom(kingFrom);
+
+            if(move.isQueenSide){
+                whiteStatus.hasQueenCostling = false;
+                move.setTo(new Position(2, 0));
+            } else { // King Side
+                whiteStatus.hasKingCostling = false;
+                move.setTo(new Position(8, 0));
+            }
+        }
+
+        movePiece(move, king);// First we move the king
+
+        if(currentPlayer == PlayerType.BLACK){
+
+            if(move.isQueenSide){
+                Position p = new Position(0, 9);
+
+                move.setFrom(p);
+                move.setTo(new Position(3, 9));
+                rookToMove = (Rook) Utils.getPiece(p.row, p.column, boardMatrix);
+
+            } else { // King side
+                Position p = new Position(9, 9);
+
+                move.setFrom(p);
+                move.setTo(new Position(7, 9));
+                rookToMove = (Rook) Utils.getPiece(p.row, p.column, boardMatrix);
+
+            }
+        } else { // WHITE
+
+            if(move.isQueenSide){
+                Position p = new Position(0, 0);
+
+                move.setFrom(p);
+                move.setTo(new Position(3, 0));
+                rookToMove = (Rook) Utils.getPiece(p.row, p.column, boardMatrix);
+
+            } else { // King side
+                Position p = new Position(9, 0);
+
+                move.setFrom(p);
+                move.setTo(new Position(7, 0));
+                rookToMove = (Rook) Utils.getPiece(p.row, p.column, boardMatrix);
+
+            }
+        }
+
+        movePiece(move, rookToMove);
+    }
+
     public void movePiece(Move move, Piece piece) {
         List<Piece> rowToModify = boardMatrix.get(move.to.getRow());
         rowToModify.set(move.from.getColumn(), new Space());
@@ -404,5 +505,88 @@ public class Board {
         this.isValidPromotion = true;
         this.isValidCheck = true;
         this.isValidCheckMate = true;
+        this.isValidCastling = true;
+    }
+
+    public void printBoard(){
+        for(Map.Entry<PieceType, Integer> entry: pieceCount.entrySet()){
+            char allowcationChar = getPieceAllocationChar(entry.getKey());
+            System.out.println(allowcationChar+":"+entry.getValue());
+        }
+        System.out.println("-----");
+        for(List<Piece> row: boardMatrix){
+
+            for(Piece piece: row){
+
+                char dp;
+                if(piece.getOwner() == PlayerType.BLACK){
+                    String c = getPieceAllocationChar(piece.getType()) + "";
+                    dp = c.toUpperCase().charAt(0);
+                } else {
+                    dp = getPieceAllocationChar(piece.getType());
+                }
+
+                System.out.print(dp);
+                System.out.print(" ");
+            }
+            System.out.println();
+        }
+        System.out.println("-----");
+
+        if(currentPlayer == PlayerType.BLACK) {
+            System.out.print("b");
+        } else {
+            System.out.print("w");
+        }
+        System.out.print(":");
+
+        if(blackStatus.hasQueenCostling){
+            System.out.print("+");
+        } else {
+            System.out.print("-");
+        }
+
+        if(blackStatus.hasKingCostling){
+            System.out.print("+");
+        } else {
+            System.out.print("-");
+        }
+
+        if(whiteStatus.hasQueenCostling){
+            System.out.print("+");
+        } else {
+            System.out.print("-");
+        }
+
+        if(whiteStatus.hasKingCostling){
+            System.out.print("+");
+        } else {
+            System.out.print("-");
+        }
+
+        System.out.print(":" + halfMoveClock);
+        System.out.print(":" + moveCounter);
+    }
+
+
+
+    public char getPieceAllocationChar(PieceType type){
+        char allocationChar = ' ';
+        switch (type) {
+            case KING: allocationChar = 'k'; break;
+            case QUEEN: allocationChar = 'q';break;
+            case AMAZON: allocationChar = 'a';break;
+            case PAWN: allocationChar = 'p';break;
+            case BISHOP: allocationChar = 'b';break;
+            case DRAGON: allocationChar = 'f';break;
+            case ROOK: allocationChar = 'r';break;
+            case KNIGHT: allocationChar = 'n';break;
+            case ELEPHANT: allocationChar = 'e';break;
+            case PRINCESS: allocationChar = 'w';break;
+            case DRUNKED_PAWN: allocationChar = 'd';break;
+            case SPACE: allocationChar = '.';break;
+        }
+
+        return allocationChar;
     }
 }

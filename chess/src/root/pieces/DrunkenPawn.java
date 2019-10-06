@@ -21,7 +21,6 @@ public class DrunkenPawn extends Pawn {
                 Piece dest = board.getBoardMatrix().get(move.getTo().getRow()).get(move.getTo().getColumn());
 
                 if(Math.abs(colDiff) == 1 && dest.getOwner() != owner){
-                    System.out.println("Capture!");
                     return true;
                 } else if(colDiff == 0 && Utils.isSpace(dest)) {
                     return true;
@@ -33,7 +32,6 @@ public class DrunkenPawn extends Pawn {
                 Piece dest = board.getBoardMatrix().get(move.getTo().getRow()).get(move.getTo().getColumn());
 
                 if(Math.abs(colDiff) == 1 && dest.getOwner() != owner){
-                    System.out.println("Capture!");
                     return true;
                 } else if(colDiff == 0 && Utils.isSpace(dest)) {
                     return true;

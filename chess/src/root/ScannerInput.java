@@ -35,6 +35,8 @@ public class ScannerInput {
 
 
             Move m;
+            int castlingIndex = line.lastIndexOf("-");
+
             // IF Move is a Promotion Move
             if(line.lastIndexOf('=') > 0) {
 
@@ -68,6 +70,12 @@ public class ScannerInput {
                 }
 
                 m = new Move(new Position(fromColumn, fromRow), new Position(toColumn, toRow),true, isCheck, isCheckMate);
+            } else if(castlingIndex > 0) {
+                if(castlingIndex == 3){ // IS Queen side
+                    m = new Move(true, true, false);
+                } else { // IS King side
+                    m = new Move(true, false, true);
+                }
             } else {
                 int checkIndex = line.lastIndexOf("+");
                 boolean isCheck = false;
@@ -90,8 +98,6 @@ public class ScannerInput {
     }
 
     public static Board readBoard(Scanner scanner) {
-
-        // TODO read in numeric input reverse as 10 is at top
 
         scanner.useDelimiter("-----");
 
@@ -122,8 +128,6 @@ public class ScannerInput {
         }
 
         List<List<Piece>> boardAsPieces = new ArrayList<>();
-
-        System.out.println(pieceCount);
 
         for(String piece : board.trim().split("\n")){
 
@@ -204,5 +208,6 @@ public class ScannerInput {
         return new Board(pt, boardAsPieces, pc, blackStatus, whiteStatus, Integer.parseInt(statusItems[2]), Integer.parseInt(statusItems[3]));
 
     }
+
 
 }
