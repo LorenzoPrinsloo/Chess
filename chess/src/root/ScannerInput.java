@@ -13,8 +13,10 @@ public class ScannerInput {
 
         while(scanner.hasNext()) {
 
+            String line = scanner.nextLine();
+
             String delimiter;
-            if(scanner.nextLine().lastIndexOf('x') > 0){
+            if(line.lastIndexOf('x') > 0){
                 delimiter = "x";
             } else {
                 delimiter = "-";
@@ -34,10 +36,10 @@ public class ScannerInput {
 
             Move m;
             // IF Move is a Promotion Move
-            if(scanner.nextLine().lastIndexOf('=') > 0){
+            if(line.lastIndexOf('=') > 0) {
 
                 PieceType pt = null;
-                switch (scanner.nextLine().split("=")[1].toUpperCase()) {
+                switch (line.split("=")[1].toUpperCase()) {
                     case "K": pt = PieceType.KING;
                     case "Q": pt = PieceType.QUEEN;
                     case "A": pt = PieceType.AMAZON;
@@ -52,8 +54,33 @@ public class ScannerInput {
                     case ".": pt = PieceType.SPACE;
                 }
                  m = new Move(new Position(fromColumn, fromRow), new Position(toColumn, toRow), pt, true);
+            } else if(line.lastIndexOf('x') > 0){
+
+                int checkIndex = line.lastIndexOf("+");
+                boolean isCheck = false;
+                boolean isCheckMate = false;
+
+                if(checkIndex == 1){
+                    isCheck = true;
+                } else if(checkIndex == 2) {
+                    isCheck = true;
+                    isCheckMate = true;
+                }
+
+                m = new Move(new Position(fromColumn, fromRow), new Position(toColumn, toRow),true, isCheck, isCheckMate);
             } else {
-                m = new Move(new Position(fromColumn, fromRow), new Position(toColumn, toRow));
+                int checkIndex = line.lastIndexOf("+");
+                boolean isCheck = false;
+                boolean isCheckMate = false;
+
+                if(checkIndex == 1){
+                    isCheck = true;
+                } else if(checkIndex == 2) {
+                    isCheck = true;
+                    isCheckMate = true;
+                }
+
+                m = new Move(new Position(fromColumn, fromRow), new Position(toColumn, toRow), isCheck, isCheckMate);
             }
 
             moves.add(m);
@@ -63,6 +90,8 @@ public class ScannerInput {
     }
 
     public static Board readBoard(Scanner scanner) {
+
+        // TODO read in numeric input reverse as 10 is at top
 
         scanner.useDelimiter("-----");
 

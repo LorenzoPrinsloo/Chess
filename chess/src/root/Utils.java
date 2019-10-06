@@ -1,6 +1,7 @@
 package root;
 
 import com.sun.tools.javac.util.Pair;
+import root.pieces.King;
 import root.pieces.Piece;
 import root.pieces.Space;
 import java.util.List;
@@ -152,4 +153,19 @@ public class Utils {
     public static boolean isSpace(Piece p) {
         return p.getClass() == Space.class;
     }
+
+    public static boolean isKing(Piece p) {
+        return p.getClass() == King.class;
+    }
+
+    public static Piece getPiece(int row, int column, List<List<Piece>> matrix) {
+        return matrix.get(row).get(column);
+    }
+
+    public static PlayerType nextPlayer(PlayerType currentPlayer) {
+        if(currentPlayer == PlayerType.BLACK){
+            return PlayerType.WHITE;
+        } else return PlayerType.BLACK;
+    }
+
 }
