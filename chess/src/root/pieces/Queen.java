@@ -1,14 +1,12 @@
 package root.pieces;
 
-import root.Board;
-import root.Move;
-import root.PlayerType;
-import root.Utils;
+import root.*;
 
 
 public class Queen implements Piece {
 
     PlayerType owner;
+    PieceType type = PieceType.QUEEN;
 
     public Queen(PlayerType o) {
         this.owner = o;
@@ -27,5 +25,10 @@ public class Queen implements Piece {
     @Override
     public PlayerType getOwner() {
         return this.owner;
+    }
+
+    @Override
+    public PieceType getType() {
+        return this.type;
     }
 }

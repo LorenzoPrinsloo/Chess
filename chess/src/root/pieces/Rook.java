@@ -1,9 +1,6 @@
 package root.pieces;
 
-import root.Board;
-import root.Move;
-import root.PlayerType;
-import root.Utils;
+import root.*;
 
 import static root.Utils.isLongitudinalMove;
 
@@ -11,6 +8,8 @@ import static root.Utils.isLongitudinalMove;
 public class Rook implements Piece {
 
     PlayerType owner;
+
+    PieceType type = PieceType.ROOK;
 
     public Rook(PlayerType o) {
         this.owner = o;
@@ -27,5 +26,10 @@ public class Rook implements Piece {
     @Override
     public PlayerType getOwner() {
         return this.owner;
+    }
+
+    @Override
+    public PieceType getType() {
+        return this.type;
     }
 }

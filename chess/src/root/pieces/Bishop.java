@@ -1,15 +1,13 @@
 package root.pieces;
 
-import root.Board;
-import root.Move;
-import root.PlayerType;
-import root.Utils;
+import root.*;
 
 import static root.Utils.isDiagonalMove;
 
 public class Bishop implements Piece {
 
     PlayerType owner;
+    PieceType type = PieceType.BISHOP;
 
     public Bishop(PlayerType o) {
         this.owner = o;
@@ -25,5 +23,10 @@ public class Bishop implements Piece {
     @Override
     public PlayerType getOwner() {
         return this.owner;
+    }
+
+    @Override
+    public PieceType getType() {
+        return this.type;
     }
 }

@@ -168,4 +168,12 @@ public class Utils {
         } else return PlayerType.BLACK;
     }
 
+    public static boolean isSamePosition(Position p1, Position p2){
+        if(p1.getRow() == p2.getRow() && p1.getColumn() == p2.getColumn()){
+            return true;
+        } else {
+            return false;
+        }
+    }
+
 }

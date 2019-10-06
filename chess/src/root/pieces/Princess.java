@@ -1,13 +1,11 @@
 package root.pieces;
 
-import root.Board;
-import root.Move;
-import root.PlayerType;
-import root.Utils;
+import root.*;
 
 public class Princess extends Knight {
 
     PlayerType owner;
+    PieceType type = PieceType.PRINCESS;
 
     public Princess(PlayerType o) {
         super(o);

@@ -1,13 +1,11 @@
 package root.pieces;
 
-import root.Board;
-import root.Move;
-import root.PlayerType;
-import root.Utils;
+import root.*;
 
 public class Amazon extends Knight {
 
     PlayerType owner;
+    PieceType type = PieceType.AMAZON;
 
     public Amazon(PlayerType o) {
         super(o);

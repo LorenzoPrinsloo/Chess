@@ -2,9 +2,12 @@ package root.pieces;
 
 import root.Board;
 import root.Move;
+import root.PieceType;
 import root.PlayerType;
 
 public class Space implements Piece {
+
+    PieceType type = PieceType.SPACE;
 
     public Space() {
     }
@@ -17,5 +20,10 @@ public class Space implements Piece {
     @Override
     public PlayerType getOwner() {
         return PlayerType.NOT_SET;
+    }
+
+    @Override
+    public PieceType getType() {
+        return this.type;
     }
 }

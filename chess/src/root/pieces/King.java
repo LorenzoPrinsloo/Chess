@@ -11,6 +11,8 @@ public class King implements Piece {
 
     PlayerType owner;
 
+    PieceType type = PieceType.KING;
+
     public King(PlayerType o) {
         this.owner = o;
     }
@@ -38,6 +40,11 @@ public class King implements Piece {
     @Override
     public PlayerType getOwner() {
         return this.owner;
+    }
+
+    @Override
+    public PieceType getType() {
+        return this.type;
     }
 
     public boolean isInCheck(final Position kingPosition, final Board board) {

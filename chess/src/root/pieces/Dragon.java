@@ -2,11 +2,13 @@ package root.pieces;
 
 import root.Board;
 import root.Move;
+import root.PieceType;
 import root.PlayerType;
 
 public class Dragon extends Bishop {
 
     PlayerType owner;
+    PieceType type = PieceType.DRAGON;
 
     public Dragon(PlayerType o) {
         super(o);

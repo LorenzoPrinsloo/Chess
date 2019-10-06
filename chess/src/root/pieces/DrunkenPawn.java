@@ -1,11 +1,10 @@
 package root.pieces;
 
-import root.Board;
-import root.Move;
-import root.PlayerType;
-import root.Utils;
+import root.*;
 
 public class DrunkenPawn extends Pawn {
+
+    PieceType type = PieceType.DRUNKED_PAWN;
 
     public DrunkenPawn(PlayerType o) {
         super(o);
@@ -53,7 +52,7 @@ public class DrunkenPawn extends Pawn {
     }
 
     @Override
-    public Piece makeOfficer(char requested, Board board) {
+    public Piece makeOfficer(PieceType requested, Board board) {
         return super.makeOfficer(requested, board);
     }
 }

@@ -12,5 +12,6 @@ public enum PieceType {
     PRINCESS,
     QUEEN,
     ROOK,
-    SPACE
+    SPACE,
+    NOT_SET
 }

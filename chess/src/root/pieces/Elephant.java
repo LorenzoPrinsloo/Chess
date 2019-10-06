@@ -2,11 +2,14 @@ package root.pieces;
 
 import root.Board;
 import root.Move;
+import root.PieceType;
 import root.PlayerType;
 
 public class Elephant extends Rook {
 
     PlayerType owner;
+
+    PieceType type = PieceType.ELEPHANT;
 
     public Elephant(PlayerType o) {
         super(o);
