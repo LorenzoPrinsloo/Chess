@@ -25,4 +25,12 @@ public class Position {
     public void setRow(int row) {
         this.row = row;
     }
+
+    public void incrementColumn() {
+        this.column++;
+    }
+
+    public void incrementRow() {
+        this.row++;
+    }
 }

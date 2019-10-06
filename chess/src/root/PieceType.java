@@ -11,5 +11,6 @@ public enum PieceType {
     PAWN,
     PRINCESS,
     QUEEN,
-    ROOK
+    ROOK,
+    SPACE
 }

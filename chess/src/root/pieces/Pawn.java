@@ -1,9 +1,6 @@
 package root.pieces;
 
-import root.Board;
-import root.Move;
-import root.PieceType;
-import root.PlayerType;
+import root.*;
 
 import java.util.List;
 
@@ -30,7 +27,7 @@ public class Pawn implements Piece {
                 if(Math.abs(colDiff) == 1 && dest.getOwner() != owner){
                     System.out.println("Capture!");
                     return true;
-                } else if(colDiff == 0 && dest == null) {
+                } else if(colDiff == 0 && Utils.isSpace(dest)) {
                     return true;
                 } else return false;
 
@@ -39,7 +36,7 @@ public class Pawn implements Piece {
                 Piece oneAhead = board.getBoardMatrix().get(move.getTo().getRow()-1).get(move.getTo().getColumn());
                 Piece twoAhead = board.getBoardMatrix().get(move.getTo().getRow()).get(move.getTo().getColumn());
 
-                if(oneAhead == null && twoAhead == null){
+                if(Utils.isSpace(oneAhead) && Utils.isSpace(twoAhead)){
                     return true;
                 } else return false;
             } else return false;
@@ -50,7 +47,7 @@ public class Pawn implements Piece {
                 if(Math.abs(colDiff) == 1 && dest.getOwner() != owner){
                     System.out.println("Capture!");
                     return true;
-                } else if(colDiff == 0 && dest == null) {
+                } else if(colDiff == 0 && Utils.isSpace(dest)) {
                     return true;
                 } else return false;
 
@@ -59,7 +56,7 @@ public class Pawn implements Piece {
                 Piece oneAhead = board.getBoardMatrix().get(move.getTo().getRow()-1).get(move.getTo().getColumn());
                 Piece twoAhead = board.getBoardMatrix().get(move.getTo().getRow()).get(move.getTo().getColumn());
 
-                if(oneAhead == null && twoAhead == null){
+                if(Utils.isSpace(oneAhead) && Utils.isSpace(twoAhead)){
                     return true;
                 } else return false;
             } else return false;

@@ -48,12 +48,14 @@ public class Main {
 //                }
 //            }
 
-            Elephant b = new Elephant(PlayerType.BLACK);
-            Move move = new Move(new Position(0, 9), new Position( 0, 1));
+            King k = new King(PlayerType.BLACK);
+            Position kingPos = new Position(5, 9);
 
-            System.out.println("Valid: "+b.isValidMove(move, board));
+            System.out.println("CheckMate "+ k.isInCheckMate(kingPos, board));
+
         } catch (Exception e) {
             System.out.println(e);
+            e.printStackTrace();
         }
     }
 }

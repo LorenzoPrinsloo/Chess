@@ -49,6 +49,7 @@ public class ScannerInput {
                     case "E": pt = PieceType.ELEPHANT;
                     case "W": pt = PieceType.PRINCESS;
                     case "d": pt = PieceType.DRUNKED_PAWN;
+                    case ".": pt = PieceType.SPACE;
                 }
                  m = new Move(new Position(fromColumn, fromRow), new Position(toColumn, toRow), pt, true);
             } else {
@@ -126,7 +127,7 @@ public class ScannerInput {
                     case 'w' : row.add(new Princess(PlayerType.WHITE)); break;
                     case 'R' : row.add(new Rook(PlayerType.BLACK)); break;
                     case 'r' : row.add(new Rook(PlayerType.WHITE)); break;
-                    default : row.add(null); break;
+                    default : row.add(new Space()); break;
                 }
             }
 
@@ -174,4 +175,5 @@ public class ScannerInput {
         return new Board(pt, boardAsPieces, pc, blackStatus, whiteStatus, Integer.parseInt(statusItems[2]), Integer.parseInt(statusItems[3]));
 
     }
+
 }

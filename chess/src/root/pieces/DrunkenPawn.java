@@ -3,6 +3,7 @@ package root.pieces;
 import root.Board;
 import root.Move;
 import root.PlayerType;
+import root.Utils;
 
 public class DrunkenPawn extends Pawn {
 
@@ -23,7 +24,7 @@ public class DrunkenPawn extends Pawn {
                 if(Math.abs(colDiff) == 1 && dest.getOwner() != owner){
                     System.out.println("Capture!");
                     return true;
-                } else if(colDiff == 0 && dest == null) {
+                } else if(colDiff == 0 && Utils.isSpace(dest)) {
                     return true;
                 } else return false;
 
@@ -35,7 +36,7 @@ public class DrunkenPawn extends Pawn {
                 if(Math.abs(colDiff) == 1 && dest.getOwner() != owner){
                     System.out.println("Capture!");
                     return true;
-                } else if(colDiff == 0 && dest == null) {
+                } else if(colDiff == 0 && Utils.isSpace(dest)) {
                     return true;
                 } else return false;
 
@@ -43,7 +44,7 @@ public class DrunkenPawn extends Pawn {
         } else {
             Piece dest = board.getBoardMatrix().get(move.getTo().getRow()).get(move.getTo().getColumn());
 
-            if(dest == null) {
+            if(Utils.isSpace(dest)) {
                 return true;
             } else {
                 return false;

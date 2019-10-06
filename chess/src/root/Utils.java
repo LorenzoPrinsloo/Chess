@@ -2,7 +2,7 @@ package root;
 
 import com.sun.tools.javac.util.Pair;
 import root.pieces.Piece;
-
+import root.pieces.Space;
 import java.util.List;
 
 public class Utils {
@@ -73,8 +73,6 @@ public class Utils {
     }
 
     public static boolean isValidLongitudinalMove(Move move, Board board, PlayerType owner) {
-        boolean reachedLocation = false;
-
         // fst is rowStep and snd is colStep
         Pair<Integer, Integer> step = Utils.calcStep(move);
         List<List<Piece>> boardMatrix = board.getBoardMatrix();
@@ -85,11 +83,10 @@ public class Utils {
         int rowDest = move.getTo().getRow();
         int colDest = move.getTo().getColumn();
 
-        while(!reachedLocation){
-
-            if((boardMatrix.get(rowCurrent).get(colCurrent) == null || boardMatrix.get(rowCurrent).get(colCurrent).getOwner() != owner) && rowCurrent == rowDest && colCurrent == colDest) {
-                reachedLocation = true;
-            } else if(boardMatrix.get(rowCurrent).get(colCurrent) != null) {
+        while(rowCurrent <= 9 && colCurrent <= 9){
+            if((isSpace(boardMatrix.get(rowCurrent).get(colCurrent)) || boardMatrix.get(rowCurrent).get(colCurrent).getOwner() != owner) && rowCurrent == rowDest && colCurrent == colDest) {
+                return true;
+            } else if(!isSpace(boardMatrix.get(rowCurrent).get(colCurrent))) {
                 return false;
             }
 
@@ -100,8 +97,6 @@ public class Utils {
     }
 
     public static boolean isValidDiagonalMove(Move move, Board board, PlayerType owner) {
-        boolean reachedLocation = false;
-
         // fst is rowStep and snd is colStep
         Pair<Integer, Integer> step = Utils.calcStep(move);
         List<List<Piece>> boardMatrix = board.getBoardMatrix();
@@ -112,13 +107,13 @@ public class Utils {
         int rowDest = move.getTo().getRow();
         int colDest = move.getTo().getColumn();
 
-        while(!reachedLocation){
+        while(rowCurrent <= 9 && colCurrent <= 9){
             System.out.println("row: " +rowCurrent + " col: "+colCurrent);
 
-            if((boardMatrix.get(rowCurrent).get(colCurrent) == null || boardMatrix.get(rowCurrent).get(colCurrent).getOwner() != owner) && rowCurrent == rowDest && colCurrent == colDest) {
+            if((isSpace(boardMatrix.get(rowCurrent).get(colCurrent)) || boardMatrix.get(rowCurrent).get(colCurrent).getOwner() != owner) && rowCurrent == rowDest && colCurrent == colDest) {
                 System.out.println("Reached Location");
-                reachedLocation = true;
-            } else if(boardMatrix.get(rowCurrent).get(colCurrent) != null) {
+                return true;
+            } else if(!isSpace(boardMatrix.get(rowCurrent).get(colCurrent))) {
 
                 System.out.println("Got Blocked");
                 return false;
@@ -130,5 +125,31 @@ public class Utils {
 
         System.out.println("prematurely exit");
         return true;
+    }
+
+    public static Position findPositionOnBoard(final Piece piece, List<List<Piece>> matrix) throws Exception {
+
+        Position pos = new Position(0,0);
+
+        for(List<Piece> row: matrix){
+
+            pos.setColumn(0);
+
+            for(Piece p: row){
+                if(p.hashCode() == piece.hashCode()){
+                    return pos;
+                }
+                pos.incrementColumn();
+            }
+
+            pos.incrementRow();
+        }
+
+        // Hasnt found the piece on the board which shouldnt happen so we throw a exception
+        throw new Exception("No Piece found on Board for "+ piece);
+    }
+
+    public static boolean isSpace(Piece p) {
+        return p.getClass() == Space.class;
     }
 }

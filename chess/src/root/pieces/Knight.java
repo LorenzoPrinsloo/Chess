@@ -4,6 +4,7 @@ import com.sun.tools.javac.util.Pair;
 import root.Board;
 import root.Move;
 import root.PlayerType;
+import root.Utils;
 
 public class Knight implements Piece {
 
@@ -20,7 +21,7 @@ public class Knight implements Piece {
             int rowDest = move.getTo().getRow();
             int colDest = move.getTo().getColumn();
 
-            if(board.getBoardMatrix().get(rowDest).get(colDest) == null || board.getBoardMatrix().get(rowDest).get(colDest).getOwner() != owner) {
+            if(Utils.isSpace(board.getBoardMatrix().get(rowDest).get(colDest)) || board.getBoardMatrix().get(rowDest).get(colDest).getOwner() != owner) {
                 return true;
             } else return false;
         } else return false;
