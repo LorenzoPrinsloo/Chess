@@ -58,8 +58,8 @@ public class Board {
                 captureRuleSet(move, line, piece);
 
             } else if(move.isNormal) {
-//                isAllocatedMove(move, line, piece);
-//                moveRuleSet(move, line, piece);
+                isAllocatedMove(move, line, piece);
+                moveRuleSet(move, line, piece);
             } else if(move.isPromotion) {
                 isAllocatedPromotion(move, line, piece);
                 promotionRuleSet(move, line, piece);
@@ -234,7 +234,7 @@ public class Board {
                 isValidMove = false;
                 MoveValidationErrors.illegalMove(line);
             }
-        } else if(k.isInCheckMate(kingPos, this)){
+        } else if(k.isInCheck(kingPos, this)){
             isValidMove = false;
             MoveValidationErrors.illegalMove(line);
         }
@@ -323,7 +323,8 @@ public class Board {
         simBoard.setEntryInBoardMatrix(move.from.row, move.from.column, new Space());
         simBoard.setEntryInBoardMatrix(move.to.row, move.to.column, piece);
 
-        if((oponentKing.isInCheck(kingPos, simBoard) && !move.isCheck) || (oponentKing.isInCheckMate(kingPos, simBoard)  && !move.isCheckMate)) {
+
+        if(oponentKing.isInCheck(kingPos, simBoard) && !move.isCheck) {
             isValidMove = false;
             MoveValidationErrors.illegalMove(line);
         }

@@ -65,9 +65,11 @@ public class King extends Piece {
     }
 
     public boolean isInCheckMate(final Position currentKingPosition, final Board board) {
-        List<Move> posibleMoves = getPosibleMoves(currentKingPosition, board);
+        if(isInCheck(currentKingPosition, board)){
+            List<Move> posibleMoves = getPosibleMoves(currentKingPosition, board);
 
-        return posibleMoves.stream().allMatch(move -> isInCheck(move.getTo(), board));
+            return posibleMoves.stream().allMatch(move -> isInCheck(move.getTo(), board));
+        } else return false;
     }
 
     private List<Move> getPosibleMoves(final Position currentKingPosition, final Board board){

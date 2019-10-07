@@ -91,4 +91,14 @@ public class Move {
     public void setCapture(boolean capture) {
         isCapture = capture;
     }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Move(");
+        sb.append("\tfrom = "+from+",\n");
+        sb.append("\tto = "+to+",\n");
+        sb.append(")");
+        return sb.toString();
+    }
 }
