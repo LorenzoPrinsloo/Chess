@@ -7,13 +7,10 @@ import root.PlayerType;
 
 public class Elephant extends Rook {
 
-    PlayerType owner;
-
-    PieceType type = PieceType.ELEPHANT;
-
     public Elephant(PlayerType o) {
         super(o);
-        this.owner = o;
+        owner = o;
+        type = PieceType.ELEPHANT;
     }
 
     @Override
@@ -31,10 +28,5 @@ public class Elephant extends Rook {
                 return super.isValidMove(move, board);
             }
         }
-    }
-
-    @Override
-    public PlayerType getOwner() {
-        return this.owner;
     }
 }

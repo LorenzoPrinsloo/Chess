@@ -3,13 +3,11 @@ package root.pieces;
 import root.*;
 
 
-public class Queen implements Piece {
-
-    PlayerType owner;
-    PieceType type = PieceType.QUEEN;
+public class Queen extends Piece {
 
     public Queen(PlayerType o) {
-        this.owner = o;
+        super.type = PieceType.QUEEN;
+        super.owner = o;
     }
 
     @Override
@@ -20,15 +18,5 @@ public class Queen implements Piece {
         } else { // We know this will be a vertical or horizontal
            return Utils.isValidLongitudinalMove(move, board, owner);
         }
-    }
-
-    @Override
-    public PlayerType getOwner() {
-        return this.owner;
-    }
-
-    @Override
-    public PieceType getType() {
-        return this.type;
     }
 }

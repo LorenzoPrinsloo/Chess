@@ -7,7 +7,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class King implements Piece {
+public class King extends Piece {
 
     PlayerType owner;
 

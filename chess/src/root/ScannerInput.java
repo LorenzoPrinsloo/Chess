@@ -35,7 +35,8 @@ public class ScannerInput {
 
 
             Move m;
-            int castlingIndex = line.lastIndexOf("-");
+            int castlingIndex = line.lastIndexOf("0");
+
 
             // IF Move is a Promotion Move
             if(line.lastIndexOf('=') > 0) {

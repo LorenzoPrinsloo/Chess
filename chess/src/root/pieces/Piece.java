@@ -5,15 +5,19 @@ import root.Move;
 import root.PieceType;
 import root.PlayerType;
 
-public interface Piece {
+public abstract class Piece {
 
-    public PlayerType owner = PlayerType.NOT_SET;
+    public PlayerType owner;
 
-    public PieceType type = PieceType.NOT_SET;
+    public PieceType type;
 
-    public boolean isValidMove(Move move, Board board);
+    abstract public boolean isValidMove(Move move, Board board);
 
-    public PlayerType getOwner();
+    public PlayerType getOwner() {
+        return owner;
+    }
 
-    public PieceType getType();
+    public PieceType getType() {
+        return type;
+    }
 }

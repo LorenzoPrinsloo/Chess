@@ -12,22 +12,28 @@ public class Main {
     public static void main(String[] args) {
 
         try {
-//            Scanner boardScanner = new Scanner(new File("/Users/cmlprinsloogmail.com/Documents/Java/Chess/chess/src/root/input/board.txt"));
-//            Board board = ScannerInput.readBoard(boardScanner);
-//
-//            board.printBoard();
-            Scanner boardScanner = new Scanner(new File(args[0]));
-            Scanner moveScanner = new Scanner(new File(args[1]));
-
+            Scanner boardScanner = new Scanner(new File("/Users/cmlprinsloogmail.com/Documents/Java/Chess/chess/src/root/input/board.txt"));
             Board board = ScannerInput.readBoard(boardScanner);
-            List<Move> moves = ScannerInput.readMoves(moveScanner);
 
-            int line = 1;
-            for(Move move: moves){
 
-                board.move(move, line);
-                line++;
-            }
+            System.out.println(board.toString());
+
+            System.out.println(new Space().getType());
+
+//            Scanner boardScanner = new Scanner(new File(args[0]));
+//            Scanner moveScanner = new Scanner(new File(args[1]));
+//
+//            Board board = ScannerInput.readBoard(boardScanner);
+//            List<Move> moves = ScannerInput.readMoves(moveScanner);
+//
+//            int line = 1;
+//            for(Move move: moves){
+//
+//                System.out.println(move.getTo());
+//                System.out.println(move.getFrom());
+//                board.move(move, line);
+//                line++;
+//            }
 
         } catch (Exception e) {
             System.out.println(e);

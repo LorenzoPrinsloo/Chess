@@ -3,13 +3,11 @@ package root.pieces;
 import com.sun.tools.javac.util.Pair;
 import root.*;
 
-public class Knight implements Piece {
-
-    PlayerType owner;
-    PieceType type = PieceType.KNIGHT;
+public class Knight extends Piece {
 
     public Knight(PlayerType o) {
-        this.owner = o;
+        owner = o;
+        type = PieceType.KNIGHT;
     }
 
     @Override
@@ -23,16 +21,6 @@ public class Knight implements Piece {
                 return true;
             } else return false;
         } else return false;
-    }
-
-    @Override
-    public PlayerType getOwner() {
-        return this.owner;
-    }
-
-    @Override
-    public PieceType getType() {
-        return this.type;
     }
 
     /**

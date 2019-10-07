@@ -4,15 +4,13 @@ import root.*;
 
 import java.util.List;
 
-public class Pawn implements Piece {
+public class Pawn extends Piece {
 
     boolean isFirstMove;
-    PlayerType owner;
-
-    PieceType type = PieceType.PAWN;
 
     public Pawn(PlayerType o) {
-        this.owner = o;
+        owner = o;
+        type = PieceType.PAWN;
         this.isFirstMove = true;
     }
 
@@ -99,15 +97,5 @@ public class Pawn implements Piece {
         }
 
         return piece;
-    }
-
-    @Override
-    public PlayerType getOwner() {
-        return this.owner;
-    }
-
-    @Override
-    public PieceType getType() {
-        return this.type;
     }
 }

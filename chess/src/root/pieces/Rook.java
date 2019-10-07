@@ -5,14 +5,11 @@ import root.*;
 import static root.Utils.isLongitudinalMove;
 
 // AKKA Castle
-public class Rook implements Piece {
-
-    PlayerType owner;
-
-    PieceType type = PieceType.ROOK;
+public class Rook extends Piece {
 
     public Rook(PlayerType o) {
-        this.owner = o;
+        owner = o;
+        type = PieceType.ROOK;
     }
 
     @Override
@@ -21,15 +18,5 @@ public class Rook implements Piece {
         if(isLongitudinalMove(move)) {
             return Utils.isValidLongitudinalMove(move, board, owner);
         } else return false;
-    }
-
-    @Override
-    public PlayerType getOwner() {
-        return this.owner;
-    }
-
-    @Override
-    public PieceType getType() {
-        return this.type;
     }
 }

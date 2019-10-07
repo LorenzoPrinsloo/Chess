@@ -17,7 +17,7 @@ public class Board {
     Map<PieceType, Integer> pieceCount;
 
     // valid status variables
-    private boolean isValidCapture = true; // add new ones to resetStatusVaraibles
+    private boolean isValidCapture = true; // add new ones to resetStatusVariables
     private boolean isValidMove = true;
     private boolean isValidPromotion = true;
     private boolean isValidCheck = true;
@@ -45,7 +45,10 @@ public class Board {
     }
 
     public void move(Move move, int line) throws Exception {
-        Piece piece = Utils.getPiece(move.from.getRow(), move.from.getColumn(), boardMatrix); // Piece to move
+        Piece piece = new Space();
+        if(move.from != null && move.to != null){
+            piece = Utils.getPiece(move.from.getRow(), move.from.getColumn(), boardMatrix); // Piece to move
+        }
 
         if(piece.isValidMove(move, this)) { //if valid move apply move and switch player
 
@@ -568,7 +571,22 @@ public class Board {
         System.out.print(":" + moveCounter);
     }
 
+    @Override
+    public String toString(){
 
+        StringBuilder sb = new StringBuilder();
+        sb.append("BOARD(\n");
+        sb.append("\tcurrentPlayer = "+currentPlayer+",\n");
+        sb.append("\tblackStatus = "+blackStatus+",\n");
+        sb.append("\twhiteStatus = "+whiteStatus+",\n");
+        sb.append("\tboardMatrix = "+boardMatrix+",\n");
+        sb.append("\thalfMoveClock = "+halfMoveClock+",\n");
+        sb.append("\tmoveCounter = "+moveCounter+",\n");
+        sb.append("\tpieceCount = "+pieceCount+",\n");
+        sb.append(")");
+
+        return sb.toString();
+    }
 
     public char getPieceAllocationChar(PieceType type){
         char allocationChar = ' ';

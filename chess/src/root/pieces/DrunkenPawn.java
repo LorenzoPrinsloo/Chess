@@ -4,10 +4,10 @@ import root.*;
 
 public class DrunkenPawn extends Pawn {
 
-    PieceType type = PieceType.DRUNKED_PAWN;
-
     public DrunkenPawn(PlayerType o) {
         super(o);
+
+        type = PieceType.DRUNKED_PAWN;
     }
 
     @Override
