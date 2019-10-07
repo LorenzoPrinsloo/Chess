@@ -84,7 +84,7 @@ public class Utils {
         int rowDest = move.getTo().getRow();
         int colDest = move.getTo().getColumn();
 
-        while(rowCurrent <= 9 && colCurrent <= 9){
+        while((rowCurrent <= 9 && colCurrent <= 9) && (rowCurrent >= 0 && colCurrent >=0)){
             if((isSpace(boardMatrix.get(rowCurrent).get(colCurrent)) || boardMatrix.get(rowCurrent).get(colCurrent).getOwner() != owner) && rowCurrent == rowDest && colCurrent == colDest) {
                 return true;
             } else if(!isSpace(boardMatrix.get(rowCurrent).get(colCurrent))) {
@@ -108,7 +108,7 @@ public class Utils {
         int rowDest = move.getTo().getRow();
         int colDest = move.getTo().getColumn();
 
-        while(rowCurrent <= 9 && colCurrent <= 9){
+        while((rowCurrent <= 9 && colCurrent <= 9) && (rowCurrent >= 0 && colCurrent >=0)){
             if((isSpace(boardMatrix.get(rowCurrent).get(colCurrent)) || boardMatrix.get(rowCurrent).get(colCurrent).getOwner() != owner) && rowCurrent == rowDest && colCurrent == colDest) {
                 return true;
             } else if(!isSpace(boardMatrix.get(rowCurrent).get(colCurrent))) {

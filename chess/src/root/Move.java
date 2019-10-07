@@ -95,7 +95,7 @@ public class Move {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("Move(");
+        sb.append("Move(\n");
         sb.append("\tfrom = "+from+",\n");
         sb.append("\tto = "+to+",\n");
         sb.append(")");

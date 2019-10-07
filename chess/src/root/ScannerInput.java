@@ -30,11 +30,12 @@ public class ScannerInput {
             int fromColumn = columnPosition(fromAlphaCharacter);
             int toColumn = columnPosition(toAlphaCharacter);
 
-            int fromRow = Utils.sanatiseMoveInput(Integer.parseInt(positions[0].substring(1, 2)));
-            int toRow = Utils.sanatiseMoveInput(Integer.parseInt(positions[1].substring(1, 2)));
+            int fromRow = Utils.sanatiseMoveInput(Integer.parseInt(positions[0].substring(1)));
+            int toRow = Utils.sanatiseMoveInput(Integer.parseInt(positions[1].substring(1)));
 
             Move m;
-            int castlingIndex = line.lastIndexOf("0");
+            boolean isKingSideCastling = line.substring(0, 2).equals("0-0");
+            boolean isQueenSideCastling = line.substring(0, 3).equals("0-0-0");
 
             // IF Move is a Promotion Move
             if(line.lastIndexOf('=') > 0) {
@@ -69,8 +70,8 @@ public class ScannerInput {
                 }
 
                 m = new Move(new Position(fromColumn, fromRow), new Position(toColumn, toRow),true, isCheck, isCheckMate);
-            } else if(castlingIndex > 0) {
-                if(castlingIndex == 3){ // IS Queen side
+            } else if(isKingSideCastling || isQueenSideCastling) {
+                if(isQueenSideCastling){ // IS Queen side
                     m = new Move(true, true, false);
                 } else { // IS King side
                     m = new Move(true, false, true);

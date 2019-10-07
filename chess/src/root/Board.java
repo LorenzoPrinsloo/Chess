@@ -26,13 +26,13 @@ public class Board {
     private boolean isValidCastling = true;
 
     public Board(Board copyFrom, List<List<Piece>> matrix) {
-        currentPlayer = copyFrom.currentPlayer;
-        this.blackStatus = copyFrom.blackStatus;
-        this.whiteStatus = copyFrom.whiteStatus;
+        currentPlayer = copyFrom.getCurrentPlayer();
+        this.blackStatus = copyFrom.getBlackStatus();
+        this.whiteStatus = copyFrom.getWhiteStatus();
         boardMatrix = matrix;
-        this.halfMoveClock = copyFrom.halfMoveClock;
-        this.moveCounter = copyFrom.moveCounter;
-        pieceCount = copyFrom.pieceCount;
+        this.halfMoveClock = copyFrom.getHalfMoveClock();
+        this.moveCounter = copyFrom.getMoveCounter();
+        pieceCount = copyFrom.getPieceCount();
     }
 
     public Board(PlayerType player, List<List<Piece>> board, Map<PieceType, Integer> pc, CostlingStatus blackStatus, CostlingStatus whiteStatus, int halfMoveClock, int moveCounter) {
@@ -52,13 +52,12 @@ public class Board {
         }
 
         if(piece.isValidMove(move, this)) { //if valid move apply move and switch player
-
             if(move.isCapture){
                 isAllocatedCapture(move, line, piece);
                 captureRuleSet(move, line, piece);
 
             } else if(move.isNormal) {
-                isAllocatedMove(move, line, piece);
+//                isAllocatedMove(move, line, piece);
                 moveRuleSet(move, line, piece);
             } else if(move.isPromotion) {
                 isAllocatedPromotion(move, line, piece);
@@ -143,6 +142,10 @@ public class Board {
 
         } // else stay on same player and throw exception
         else {
+            printBoard();
+            System.out.println(Utils.getPiece(9,0, boardMatrix));
+            System.out.println(piece.toString());
+            System.out.println(move.toString());
             MoveValidationErrors.illegalMove(line);
         }
 
@@ -279,6 +282,10 @@ public class Board {
     public boolean pieceExistsAt(Piece piece, Position position) {
         Piece foundPiece = Utils.getPiece(position.row, position.column, boardMatrix);
 
+        System.out.println(piece.toString());
+        System.out.println(foundPiece.toString());
+        System.out.println(position.toString());
+        System.out.println();
         if(piece.getClass().equals(foundPiece.getClass()) && piece.getOwner().equals(foundPiece.getOwner())) {
             return true;
         } else return false;
@@ -315,6 +322,7 @@ public class Board {
             isValidMove = true;
         }
 
+        //TODO this shit is mutating the variables of this class for some reason
         King oponentKing = getKingFor(Utils.nextPlayer(currentPlayer));
         Board simBoard = new Board(this, getBoardMatrix());
         Position kingPos = Utils.findPositionOnBoard(oponentKing, simBoard.getBoardMatrix());
@@ -322,7 +330,6 @@ public class Board {
 
         simBoard.setEntryInBoardMatrix(move.from.row, move.from.column, new Space());
         simBoard.setEntryInBoardMatrix(move.to.row, move.to.column, piece);
-
 
         if(oponentKing.isInCheck(kingPos, simBoard) && !move.isCheck) {
             isValidMove = false;

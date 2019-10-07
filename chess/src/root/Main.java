@@ -13,7 +13,7 @@ public class Main {
     public static void main(String[] args) {
 
         try {
-            Scanner boardScanner = new Scanner(new File("/Users/cmlprinsloogmail.com/Documents/Java/Chess/chess/src/root/input/board.txt"));
+            Scanner boardScanner = new Scanner(new File("/Users/cmlprinsloogmail.com/Documents/Java/Chess/chess/src/root/input/testBoard.txt"));
             Scanner moveScanner = new Scanner(new File("/Users/cmlprinsloogmail.com/Documents/Java/Chess/chess/src/root/input/testMove.txt"));
 
             Board board = ScannerInput.readBoard(boardScanner);
