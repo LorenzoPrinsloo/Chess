@@ -1,5 +1,6 @@
 package root;
 
+import com.sun.deploy.util.BlackList;
 import root.pieces.*;
 
 import java.io.File;
@@ -13,27 +14,19 @@ public class Main {
 
         try {
             Scanner boardScanner = new Scanner(new File("/Users/cmlprinsloogmail.com/Documents/Java/Chess/chess/src/root/input/board.txt"));
+            Scanner moveScanner = new Scanner(new File("/Users/cmlprinsloogmail.com/Documents/Java/Chess/chess/src/root/input/testMove.txt"));
+
             Board board = ScannerInput.readBoard(boardScanner);
+            List<Move> moves = ScannerInput.readMoves(moveScanner);
 
+            int line = 1;
+            for(Move move: moves){
+                board.move(move, line);
+                line++;
+            }
 
-            System.out.println(board.toString());
-
-            System.out.println(new Space().getType());
-
-//            Scanner boardScanner = new Scanner(new File(args[0]));
-//            Scanner moveScanner = new Scanner(new File(args[1]));
-//
-//            Board board = ScannerInput.readBoard(boardScanner);
-//            List<Move> moves = ScannerInput.readMoves(moveScanner);
-//
-//            int line = 1;
-//            for(Move move: moves){
-//
-//                System.out.println(move.getTo());
-//                System.out.println(move.getFrom());
-//                board.move(move, line);
-//                line++;
-//            }
+            System.out.println("AFTER");
+            board.printBoard();
 
         } catch (Exception e) {
             System.out.println(e);

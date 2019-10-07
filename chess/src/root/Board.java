@@ -3,6 +3,7 @@ package root;
 import root.errors.MoveValidationErrors;
 import root.pieces.*;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
@@ -57,8 +58,8 @@ public class Board {
                 captureRuleSet(move, line, piece);
 
             } else if(move.isNormal) {
-                isAllocatedMove(move, line, piece);
-                moveRuleSet(move, line, piece);
+//                isAllocatedMove(move, line, piece);
+//                moveRuleSet(move, line, piece);
             } else if(move.isPromotion) {
                 isAllocatedPromotion(move, line, piece);
                 promotionRuleSet(move, line, piece);
@@ -413,11 +414,8 @@ public class Board {
     }
 
     public void movePiece(Move move, Piece piece) {
-        List<Piece> rowToModify = boardMatrix.get(move.to.getRow());
-        rowToModify.set(move.from.getColumn(), new Space());
-        rowToModify.set(move.to.getColumn(), piece);
-
-        boardMatrix.set(move.to.getRow(), rowToModify);
+        setEntryInBoardMatrix(move.from.getColumn(),move.from.getRow(), new Space());
+        setEntryInBoardMatrix(move.to.getColumn(),move.to.getRow(), piece);
     }
 
     private King getKingFor(PlayerType playerType){
@@ -428,7 +426,6 @@ public class Board {
     public King getCurrentKing(){
         return getKingFor(currentPlayer);
     }
-
 
     public PlayerType getCurrentPlayer() {
         return currentPlayer;
@@ -569,6 +566,7 @@ public class Board {
 
         System.out.print(":" + halfMoveClock);
         System.out.print(":" + moveCounter);
+        System.out.println();
     }
 
     @Override

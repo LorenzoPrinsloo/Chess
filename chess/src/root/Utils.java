@@ -171,4 +171,10 @@ public class Utils {
         }
     }
 
+    public static int sanatiseMoveInput(int posInt){
+        String ints = "10,9,8,7,6,5,4,3,2,1,0";
+
+        return Integer.parseInt(ints.split(",")[posInt]);
+    }
+
 }

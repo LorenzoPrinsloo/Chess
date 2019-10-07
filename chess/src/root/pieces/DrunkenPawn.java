@@ -6,7 +6,6 @@ public class DrunkenPawn extends Pawn {
 
     public DrunkenPawn(PlayerType o) {
         super(o);
-
         type = PieceType.DRUNKED_PAWN;
     }
 

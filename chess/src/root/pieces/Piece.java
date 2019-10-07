@@ -20,4 +20,16 @@ public abstract class Piece {
     public PieceType getType() {
         return type;
     }
+
+    @Override
+    public String toString() {
+
+        StringBuilder sb = new StringBuilder();
+
+        sb.append(type+"(");
+        sb.append("owner = "+owner+"");
+        sb.append(")");
+
+        return sb.toString();
+    }
 }

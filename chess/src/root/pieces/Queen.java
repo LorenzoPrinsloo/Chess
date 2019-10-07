@@ -6,8 +6,8 @@ import root.*;
 public class Queen extends Piece {
 
     public Queen(PlayerType o) {
-        super.type = PieceType.QUEEN;
-        super.owner = o;
+        type = PieceType.QUEEN;
+        owner = o;
     }
 
     @Override

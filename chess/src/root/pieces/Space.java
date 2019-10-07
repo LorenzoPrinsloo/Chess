@@ -14,6 +14,6 @@ public class Space extends Piece {
 
     @Override
     public boolean isValidMove(Move move, Board board) { // Moving a space is never valid
-        return true;
+        return false;
     }
 }

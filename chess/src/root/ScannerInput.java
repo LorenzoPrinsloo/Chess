@@ -22,7 +22,7 @@ public class ScannerInput {
                 delimiter = "-";
             }
 
-            String[] positions = scanner.nextLine().split(delimiter);
+            String[] positions = line.split(delimiter);
 
             char fromAlphaCharacter = positions[0].charAt(0);
             char toAlphaCharacter = positions[1].charAt(0);
@@ -30,31 +30,29 @@ public class ScannerInput {
             int fromColumn = columnPosition(fromAlphaCharacter);
             int toColumn = columnPosition(toAlphaCharacter);
 
-            int fromRow = Integer.parseInt(positions[0].substring(1, 2));
-            int toRow = Integer.parseInt(positions[1].substring(1, 2));
-
+            int fromRow = Utils.sanatiseMoveInput(Integer.parseInt(positions[0].substring(1, 2)));
+            int toRow = Utils.sanatiseMoveInput(Integer.parseInt(positions[1].substring(1, 2)));
 
             Move m;
             int castlingIndex = line.lastIndexOf("0");
-
 
             // IF Move is a Promotion Move
             if(line.lastIndexOf('=') > 0) {
 
                 PieceType pt = null;
                 switch (line.split("=")[1].toUpperCase()) {
-                    case "K": pt = PieceType.KING;
-                    case "Q": pt = PieceType.QUEEN;
-                    case "A": pt = PieceType.AMAZON;
-                    case "P": pt = PieceType.PAWN;
-                    case "B": pt = PieceType.BISHOP;
-                    case "F": pt = PieceType.DRAGON;
-                    case "R": pt = PieceType.ROOK;
-                    case "N": pt = PieceType.KNIGHT;
-                    case "E": pt = PieceType.ELEPHANT;
-                    case "W": pt = PieceType.PRINCESS;
-                    case "d": pt = PieceType.DRUNKED_PAWN;
-                    case ".": pt = PieceType.SPACE;
+                    case "A": pt = PieceType.AMAZON; break;
+                    case "B": pt = PieceType.BISHOP; break;
+                    case "F": pt = PieceType.DRAGON; break;
+                    case "d": pt = PieceType.DRUNKED_PAWN; break;
+                    case "E": pt = PieceType.ELEPHANT; break;
+                    case "K": pt = PieceType.KING; break;
+                    case "N": pt = PieceType.KNIGHT; break;
+                    case "P": pt = PieceType.PAWN; break;
+                    case "W": pt = PieceType.PRINCESS; break;
+                    case "Q": pt = PieceType.QUEEN; break;
+                    case "R": pt = PieceType.ROOK; break;
+                    case ".": pt = PieceType.SPACE; break;
                 }
                  m = new Move(new Position(fromColumn, fromRow), new Position(toColumn, toRow), pt, true);
             } else if(line.lastIndexOf('x') > 0){
@@ -114,17 +112,17 @@ public class ScannerInput {
             Integer n = Integer.parseInt(row.split(":")[1]);
 
             switch (p) {
-                case 'k': pc.put(PieceType.KING, n);
-                case 'q': pc.put(PieceType.QUEEN, n);
-                case 'a': pc.put(PieceType.AMAZON, n);
-                case 'p': pc.put(PieceType.PAWN, n);
-                case 'b': pc.put(PieceType.BISHOP, n);
-                case 'f': pc.put(PieceType.DRAGON, n);
-                case 'r': pc.put(PieceType.ROOK, n);
-                case 'n': pc.put(PieceType.KNIGHT, n);
-                case 'e': pc.put(PieceType.ELEPHANT, n);
-                case 'w': pc.put(PieceType.PRINCESS, n);
-                case 'd': pc.put(PieceType.DRUNKED_PAWN, n);
+                case 'a': pc.put(PieceType.AMAZON, n); break;
+                case 'b': pc.put(PieceType.BISHOP, n); break;
+                case 'k': pc.put(PieceType.KING, n); break;
+                case 'q': pc.put(PieceType.QUEEN, n); break;
+                case 'p': pc.put(PieceType.PAWN, n); break;
+                case 'f': pc.put(PieceType.DRAGON, n); break;
+                case 'r': pc.put(PieceType.ROOK, n); break;
+                case 'n': pc.put(PieceType.KNIGHT, n); break;
+                case 'e': pc.put(PieceType.ELEPHANT, n); break;
+                case 'w': pc.put(PieceType.PRINCESS, n); break;
+                case 'd': pc.put(PieceType.DRUNKED_PAWN, n); break;
             }
         }
 
