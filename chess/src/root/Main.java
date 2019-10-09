@@ -18,15 +18,21 @@ public class Main {
 
             Board board = ScannerInput.readBoard(boardScanner);
             List<Move> moves = ScannerInput.readMoves(moveScanner);
+//
+//            int line = 1;
+//            for(Move move: moves){
+//                board.move(move, line);
+//                line++;
+//            }
+//
+//            System.out.println("AFTER");
+//            board.printBoard();
 
-            int line = 1;
-            for(Move move: moves){
-                board.move(move, line);
-                line++;
-            }
+            Board copy = new Board(board);
 
-            System.out.println("AFTER");
+            board.setEntryInBoardMatrix(0,0, new Space());
             board.printBoard();
+            copy.printBoard();
 
         } catch (Exception e) {
             System.out.println(e);

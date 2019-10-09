@@ -5,6 +5,11 @@ public class CostlingStatus {
     boolean hasKingCostling;
     boolean hasQueenCostling;
 
+    public CostlingStatus(boolean kStatus, boolean qStatus) {
+        hasKingCostling = kStatus;
+        hasQueenCostling = qStatus;
+    }
+
     public CostlingStatus() {
         hasKingCostling = true;
         hasQueenCostling = true;

@@ -3,10 +3,8 @@ package root;
 import root.errors.MoveValidationErrors;
 import root.pieces.*;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class Board {
     PlayerType currentPlayer;
@@ -25,15 +23,16 @@ public class Board {
     private boolean isValidCheckMate = true;
     private boolean isValidCastling = true;
 
-    public Board(Board copyFrom, List<List<Piece>> matrix) {
-        currentPlayer = copyFrom.getCurrentPlayer();
-        this.blackStatus = copyFrom.getBlackStatus();
-        this.whiteStatus = copyFrom.getWhiteStatus();
-        boardMatrix = matrix;
-        this.halfMoveClock = copyFrom.getHalfMoveClock();
-        this.moveCounter = copyFrom.getMoveCounter();
-        pieceCount = copyFrom.getPieceCount();
+    public Board(Board cp) {
+        this.currentPlayer = cp.getCurrentPlayer();
+        this.blackStatus = new CostlingStatus(cp.getBlackStatus().hasKingCostling, cp.getBlackStatus().hasQueenCostling);
+        this.whiteStatus = new CostlingStatus(cp.getWhiteStatus().hasKingCostling, cp.getWhiteStatus().hasQueenCostling);
+        this.boardMatrix = cp.getBoardMatrix().stream().map(ArrayList::new).collect(Collectors.toList());
+        this.halfMoveClock = cp.getHalfMoveClock();
+        this.moveCounter = cp.getMoveCounter();
+        this.pieceCount = new HashMap<>(cp.getPieceCount());
     }
+
 
     public Board(PlayerType player, List<List<Piece>> board, Map<PieceType, Integer> pc, CostlingStatus blackStatus, CostlingStatus whiteStatus, int halfMoveClock, int moveCounter) {
         currentPlayer = player;
@@ -197,7 +196,7 @@ public class Board {
 
             //4.
             if(k.isInCheck(kingPos, this)){ //Current king is in check and move doesnt remove him from check
-                Board simBoard = new Board(this, getBoardMatrix());
+                Board simBoard = new Board(this);
 
                 simBoard.setEntryInBoardMatrix(move.from.row, move.from.column, new Space());
                 simBoard.setEntryInBoardMatrix(move.to.row, move.to.column, piece);
@@ -228,7 +227,7 @@ public class Board {
         Position kingPos = Utils.findPositionOnBoard(k, boardMatrix);
 
         if(k.isInCheck(kingPos, this)){ //Current king is in check and move doesnt remove him from check
-            Board simBoard = new Board(this, getBoardMatrix());
+            Board simBoard = new Board(this);
 
             simBoard.setEntryInBoardMatrix(move.from.row, move.from.column, new Space());
             simBoard.setEntryInBoardMatrix(move.to.row, move.to.column, piece);
@@ -264,7 +263,7 @@ public class Board {
         Position kingPos = Utils.findPositionOnBoard(k, boardMatrix);
 
         if(k.isInCheck(kingPos, this)){ //Current king is in check and capture doesnt remove him from check
-            Board simBoard = new Board(this, getBoardMatrix());
+            Board simBoard = new Board(this);
 
             simBoard.setEntryInBoardMatrix(move.from.row, move.from.column, new Space());
             simBoard.setEntryInBoardMatrix(move.to.row, move.to.column, piece);
@@ -296,7 +295,7 @@ public class Board {
      */
     public void isAllocatedCapture(Move move, int line, Piece movedPiece) throws Exception {
         King oponentKing = getKingFor(Utils.nextPlayer(currentPlayer));
-        Board simBoard = new Board(this, getBoardMatrix());
+        Board simBoard = new Board(this);
         Position kingPos = Utils.findPositionOnBoard(oponentKing, simBoard.getBoardMatrix());
 
 
@@ -324,7 +323,7 @@ public class Board {
 
         //TODO this shit is mutating the variables of this class for some reason
         King oponentKing = getKingFor(Utils.nextPlayer(currentPlayer));
-        Board simBoard = new Board(this, getBoardMatrix());
+        Board simBoard = new Board(this);
         Position kingPos = Utils.findPositionOnBoard(oponentKing, simBoard.getBoardMatrix());
 
 
@@ -339,7 +338,7 @@ public class Board {
 
     public void isAllocatedPromotion(Move move, int line, Piece piece) throws Exception {
         King oponentKing = getKingFor(Utils.nextPlayer(currentPlayer));
-        Board simBoard = new Board(this, getBoardMatrix());
+        Board simBoard = new Board(this);
         Position kingPos = Utils.findPositionOnBoard(oponentKing, simBoard.getBoardMatrix());
 
 
